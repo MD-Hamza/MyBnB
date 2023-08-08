@@ -118,7 +118,7 @@ CREATE TABLE payment (
     userID varchar(24),
     FOREIGN KEY (number) REFERENCES card(number),
     FOREIGN KEY (userID) REFERENCES user(UserID),
-    PRIMARY KEY (number, userID)
+    PRIMARY KEY (userID)
 );
 
 CREATE TABLE host (
@@ -126,5 +126,5 @@ CREATE TABLE host (
     UserID varchar(24) NOT NULL,
     FOREIGN KEY (lID) REFERENCES listing(lID),
     FOREIGN KEY (UserID) REFERENCES user(UserID),
-    PRIMARY KEY (lID, UserID)
+    PRIMARY KEY (lID)
 );
