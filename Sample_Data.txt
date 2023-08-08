@@ -207,10 +207,10 @@ VALUES
 INSERT INTO Cancelled_Listings (lID, userID)
 VALUES
     (23, 'user1'),
-    (23, 'user1'),
-    (23, 'user1'),
+    (22, 'user1'),
+    (21, 'user1'),
 
-    (24, 'user2'),
+    (23, 'user2'),
     (24, 'user2'),
 
     (41, 'user3');
