@@ -1,3 +1,5 @@
+use myBnb
+
 DROP TABLE IF EXISTS amenities;
 DROP TABLE IF EXISTS availability;
 DROP TABLE IF EXISTS book;
@@ -28,6 +30,17 @@ CREATE TABLE user (
     SIN bigInt,
     FOREIGN KEY (SIN) REFERENCES person(SIN)
 );
+
+DELIMITER |
+CREATE TRIGGER check_age_non_negative BEFORE INSERT ON person
+FOR EACH ROW
+BEGIN
+    IF NEW.Age < 18 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Must be at least 18 years of age';
+    END IF;
+END;
+|
+DELIMITER ;
 
 CREATE TABLE location (
     longitude double,
@@ -100,8 +113,19 @@ CREATE TABLE feedback_listing (
     Rating int,
     UserID varchar(24),
     FOREIGN KEY (lID) REFERENCES listing(lID),
-    FOREIGN KEY (UserID) REFERENCES user(UserID)
+    FOREIGN KEY (UserID) REFERENCES user(UserID),
+    PRIMARY KEY (lID, UserID)
 );
+
+DELIMITER |
+CREATE TRIGGER FeedbackListing_Rating_trigger BEFORE INSERT ON feedback_listing
+FOR EACH ROW BEGIN
+    IF NEW.Rating < 0 OR NEW.Rating > 5 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Rating must be between 0 and 5.';
+    END IF;
+END;
+|
+DELIMITER ;
 
 CREATE TABLE feedback_user (
     UserID varchar(24),
@@ -112,6 +136,16 @@ CREATE TABLE feedback_user (
     FOREIGN KEY (UserID) REFERENCES user(UserID),
     FOREIGN KEY (HostID) REFERENCES user(UserID)
 );
+
+DELIMITER |
+CREATE TRIGGER FeedbackUser_Rating_trigger BEFORE INSERT ON feedback_user
+FOR EACH ROW BEGIN
+    IF NEW.Rating < 0 OR NEW.Rating > 5 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Rating must be between 0 and 5.';
+    END IF;
+END;
+|
+DELIMITER ;
 
 CREATE TABLE payment (
     number bigint,
