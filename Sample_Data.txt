@@ -1,0 +1,245 @@
+INSERT INTO Person
+VALUES
+    (123456789, 'John Doe', 30, '123 Main St', '1980-01-15', 'Engineer'),
+    (987654321, 'Jane Smith', 25, '456 Elm St', '1995-05-20', 'Teacher'),
+    (555555555, 'Michael Johnson', 40, '789 Oak St', '1981-09-10', 'Doctor'),
+    (111111111, 'Emily Williams', 28, '567 Pine St', '1993-03-08', 'Artist'),
+    (777777777, 'David Brown', 22, '234 Birch St', '2000-07-12', 'Student');
+
+INSERT INTO User
+VALUES
+    ('user1', 'password1', 123456789),
+    ('user2', 'password2', 987654321),
+    ('user3', 'password3', 555555555),
+    ('user4', 'password4', 111111111),
+    ('user5', 'password5', 777777777);
+
+INSERT INTO Location
+VALUES
+    (40.7128, -74.0060, '10001', 'New York', 'USA'),
+    (34.0522, -117.2437, '90001', 'Los Angeles', 'USA'),
+    (51.5074, -0.1478, 'SW1A 1AA', 'London', 'UK'),
+    (48.8566, 2.3522, '75001', 'Paris', 'France'),
+    (55.7558, 37.6173, '101000', 'Moscow', 'Russia'),
+    (35.6895, 139.6917, '100-0001', 'Tokyo', 'Japan'),
+    (19.4326, -99.1332, '06000', 'Mexico City', 'Mexico'),
+    (22.3964, 114.1095, 0056, 'Hong Kong', 'China'),
+    (37.7749, -122.4194, '94102', 'San Francisco', 'USA'),
+    (41.9028, 12.4964, '00120', 'Rome', 'Italy'),
+    (40.7128, -74.0090, '10001', 'New York City', 'USA'),
+    (34.0522, -11.2437, '90002', 'Los Angeles', 'USA'),
+    (41.8781, -87.6298, '60601', 'Chicago', 'USA'),
+    (51.5074, -0.1278, 'SW1A 1AA', 'London', 'UK'),
+    (34.0522, -118.2437, '90001', 'Los Angeles', 'USA'),
+    (41.8781, -88.6298, '60602', 'Chicago', 'USA'),
+    (51.5074, -0.1258, 'SW1A 1AB', 'London', 'UK'),
+    (48.8566, 2.3512, '75001', 'Paris', 'France'),
+    (40.7128, -74.060, '10001', 'New York City', 'USA'),
+    (43.001, 43.001, '12345', 'Sample City 1', 'Sample Country'),
+    (43.002, 43.002, '12346', 'Sample City 2', 'Sample Country'),
+    (43.003, 43.003, '12347', 'Sample City 3', 'Sample Country'),
+    (43.004, 43.004, '12348', 'Sample City 4', 'Sample Country'),
+    (43.005, 43.005, '12349', 'Sample City 5', 'Sample Country');
+
+INSERT INTO Listing (lID, type, longitude, latitude)
+VALUES
+    (1, 'Apartment', 40.7128, -74.0060),
+    (2, 'Full House', 34.0522, -118.2437),
+    (3, 'Room', 51.5074, -0.1278),
+    (4, 'Apartment', 48.8566, 2.3522),
+    (5, 'Full House', 55.7558, 37.6173),
+    (6, 'Room', 35.6895, 139.6917),
+    (7, 'Apartment', 19.4326, -99.1332),
+    (8, 'Full House', 22.3964, 114.1095),
+    (9, 'Room', 37.7749, -122.4194),
+    (10, 'Apartment', 41.9028, 12.4964),
+    (21, 'Apartment', 40.7128, -74.0060),
+    (22, 'Full House', 34.0522, -118.2437),
+    (23, 'Room', 41.8781, -87.6298),
+    (24, 'Apartment', 51.5074, -0.1278),
+    (31, 'Apartment', 34.0522, -118.2437),
+    (32, 'Full House', 41.8781, -87.6298),
+    (33, 'Room', 51.5074, -0.1278),
+    (34, 'Apartment', 34.0522, -118.2437),
+    (35, 'Full House', 41.8781, -87.6298),
+    (36, 'Room', 51.5074, -0.1278),
+    (37, 'Apartment', 48.8566, 2.3522),
+    (38, 'Full House', 40.7128, -74.0060),
+    (39, 'Room', 48.8566, 2.3522),
+    (40, 'Apartment', 40.7128, -74.0060),
+    (41, 'Apartment', 43.001, 43.001),
+    (42, 'Full House', 43.002, 43.002),
+    (43, 'Room', 43.003, 43.003),
+    (44, 'Apartment', 43.004, 43.004),
+    (45, 'Full House', 43.005, 43.005);
+
+INSERT INTO Host (lID, UserID)
+VALUES
+    (1, 'user5'),
+    (2, 'user5'),
+    (3, 'user3'),
+    (4, 'user2'),
+    (5, 'user5'),
+    (6, 'user5'),
+    (7, 'user3'),
+    (8, 'user3'),
+    (9, 'user4'),
+    (10, 'user5'),
+    (21, 'user3'),
+    (22, 'user3'),
+    (23, 'user3'),
+    (24, 'user1'),
+    (31, 'user1'),
+    (32, 'user1'),
+    (33, 'user1'),
+    (34, 'user1'),
+    (35, 'user2'),
+    (36, 'user2'),
+    (37, 'user2'),
+    (38, 'user2'),
+    (39, 'user5'),
+    (40, 'user5'),
+    (41, 'user5'),
+    (42, 'user5'),
+    (43, 'user3'),
+    (44, 'user3'),
+    (45, 'user3');
+
+INSERT INTO Availability (lID, Date, Price)
+VALUES
+    (1, '2023-08-10', 150.00),
+    (2, '2023-08-12', 200.00),
+    (3, '2023-08-14', 100.00),
+    (4, '2023-08-16', 180.00),
+    (5, '2023-08-18', 220.00),
+    (6, '2023-08-20', 120.00),
+    (7, '2023-08-22', 190.00),
+    (8, '2023-08-24', 210.00),
+    (9, '2023-08-26', 110.00),
+    (10, '2023-08-28', 170.00),
+    (21, '2023-08-11', 160.00),
+    (22, '2023-08-13', 210.00),
+    (23, '2023-08-15', 110.00),
+    (24, '2023-08-17', 190.00),
+    (41, '2023-08-10', 150.00),
+    (42, '2023-08-12', 200.00),
+    (43, '2023-08-14', 100.00),
+    (44, '2023-08-16', 180.00),
+    (45, '2023-08-18', 220.00);
+
+INSERT INTO Amenities (Name, lID)
+VALUES
+    ('Bedding', 41),
+    ('Towels', 41),
+    ('Soap', 41),
+    ('Toilet paper', 41),
+    ('Wi-Fi', 41),
+    ('Parking', 41),
+    ('Bedding', 42),
+    ('Towels', 42),
+    ('Soap', 42),
+    ('Toilet paper', 42),
+    ('Kitchen facilities', 42),
+    ('Wi-Fi', 42),
+    ('Heating and air conditioning', 42),
+    ('TV and entertainment', 42),
+    ('Washer and dryer', 42),
+    ('Parking', 42),
+    ('Bedding', 43),
+    ('Towels', 43),
+    ('Soap', 43),
+    ('Toilet paper', 43),
+    ('Kitchen facilities', 43),
+    ('Parking', 43);
+
+INSERT INTO card (number, cvc, expiry_date)
+VALUES (1234567890123456, 123, '2025-12-31'),
+       (9876543210987654, 456, '2024-10-15'),
+       (1234567890121456, 123, '2025-12-31'),
+       (9876543210982654, 486, '2024-10-15'),
+       (1234567890125456, 183, '2025-12-31');
+
+INSERT INTO payment (number, userID)
+VALUES (1234567890123456, 'user1'),
+       (9876543210987654, 'user2'),
+       (1234567890121456, 'user3'),
+       (9876543210982654, 'user4'),
+       (1234567890125456, 'user5');
+
+INSERT INTO Book (lID, UserID, date, price)
+VALUES (41, 'user1', '2023-07-20', 100),
+       (41, 'user1', '2020-07-15', 100);
+
+INSERT INTO Book (lID, UserID, date, price)
+VALUES (42, 'user1', '2021-01-10', 150),
+       (42, 'user1', '2015-07-05', 150);
+
+INSERT INTO Book (lID, UserID, date, price)
+VALUES (43, 'user1', '2003-06-30', 80),
+       (43, 'user1', '2013-09-25', 80);
+
+INSERT INTO Book (lID, UserID, date, price)
+VALUES (41, 'user2', '2007-12-20', 100),
+       (41, 'user2', '2023-07-15', 100);
+
+INSERT INTO Book (lID, UserID, date, price)
+VALUES (42, 'user2', '2021-07-10', 200),
+       (42, 'user2', '2020-07-05', 200);
+
+INSERT INTO Book (lID, UserID, date, price)
+VALUES (43, 'user3', '2017-12-30', 80),
+       (43, 'user3', '2019-04-25', 80);
+
+INSERT INTO Cancelled_Bookings (lID, userID, date)
+VALUES
+    (2, 'user1', '2023-07-15'),
+    (4, 'user1', '2023-06-28'),
+    (7, 'user1', '2023-06-15'),
+
+    (21, 'user2', '2023-07-12'),
+    (23, 'user2', '2023-07-02'),
+
+    (31, 'user3', '2023-06-25'),
+    (35, 'user3', '2023-06-18'),
+    (42, 'user3', '2023-06-10'),
+    (45, 'user3', '2023-06-01');
+
+INSERT INTO Cancelled_Listings (lID, userID)
+VALUES
+    (543224, 'user1'),
+    (64234, 'user1'),
+    (84324, 'user1'),
+
+    (2422, 'user2'),
+    (2442, 'user2'),
+
+    (414234, 'user3');
+
+INSERT INTO feedback_listing (lID, Comment, Rating, UserID)
+VALUES
+    (1, 'Great apartment with all the amenities we needed. Clean and spacious!', 5, 'user1'),
+    (2, 'The full house was perfect for our family vacation. Highly recommended.', 4, 'user1'),
+    (3, 'Cozy room with a nice view. Enjoyed our stay.', 4, 'user1'),
+    (4, 'Spacious apartment with a modern kitchen. Loved it!', 5, 'user1'),
+    (5, 'The full house was clean and well-maintained. Great experience.', 4, 'user1'),
+    (6, 'Comfy room with good facilities. Would stay again.', 4, 'user1'),
+    (7, 'Nice apartment with a convenient location. Enjoyed the stay.', 4, 'user1'),
+    (8, 'The full house had everything we needed. Very satisfied.', 5, 'user1'),
+    (9, 'Clean and tidy room. Friendly host. Would recommend.', 4, 'user1'),
+    (10, 'Modern apartment with great amenities. Would book again.', 5, 'user1'),
+    (21, 'Spacious apartment with a beautiful view. Loved it!', 5, 'user2'),
+    (22, 'The full-house was perfect for our group. Had a wonderful time.', 4, 'user2'),
+    (23, 'Cozy room with all the essentials. Friendly host.', 4, 'user2'),
+    (24, 'Modern apartment with great facilities. Highly recommended.', 5, 'user2'),
+    (31, 'Clean apartment with nice amenities. Enjoyed the stay.', 4, 'user3'),
+    (32, 'The full house was comfortable and well-equipped. Great experience.', 4, 'user3'),
+    (33, 'Cozy room with a lovely-atmosphere. Friendly host.', 4, 'user3'),
+    (34, 'Spacious apartment with modern furnishings. Would stay again.', 5, 'user3'),
+    (35, 'The full house was clean and had all the necessary items. Satisfied.', 4, 'user3');
+
+INSERT INTO feedback_user (UserID, HostID, Comment, Rating)
+VALUES
+    ('user2', 'user1', 'Excellent guest. Communication was smooth.', 5),
+    ('user2', 'user3', 'Polite and respectful guest. Would host again.', 4),
+    ('user3', 'user1', 'Friendly and considerate guest. Welcome back anytime.', 5),
+    ('user3', 'user2', 'Good guest. Left the place tidy.', 4);
