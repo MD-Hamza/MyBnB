@@ -25,7 +25,7 @@ public class BookingManager {
             System.out.println("""
                     Select any of the following options
                     1) Search by Exact Address
-                    2) Search by Coordinates
+                    2) Search by Proximity
                     3) Search by Postal Code
                     4) Search by Date Range
                     5) Apply Filters
@@ -72,11 +72,22 @@ public class BookingManager {
                         latitude = scanner.nextLine();
                     } while (!Main.validateDouble(-90, 90, latitude));
 
-                    System.out.println("Enter threshold distance where the listings will be within");
-                    do {
-                        distance = scanner.nextLine();
-                    } while (!Main.validate(0, 999999999, distance));
-                    searchManager.getNearest(Double.parseDouble(longitude), Double.parseDouble(latitude), Double.parseDouble(distance));
+                    System.out.println("Press y to enter threshold distance where the listings will be within, otherwise default 10 will be used");
+                    if (Objects.equals(scanner.nextLine(), "y")) {
+                        do {
+                            distance = scanner.nextLine();
+                        } while (!Main.validate(0, 999999999, distance));
+                    } else {
+                        distance = "10";
+                    }
+
+                    System.out.println("Press y to sort by price");
+                    boolean p = Objects.equals(scanner.nextLine(), "y");
+
+                    System.out.println("Press y to sort Descending");
+                    boolean desc = Objects.equals(scanner.nextLine(), "y");
+
+                    searchManager.getNearest(Double.parseDouble(longitude), Double.parseDouble(latitude), Double.parseDouble(distance), p, desc);
                     break;
                 case 3:
                     System.out.println("Enter postal code");
@@ -239,7 +250,7 @@ public class BookingManager {
                     String comment = scanner.nextLine();
 
                     System.out.println("Enter the rating out of 5");
-                    while (!Main.validate(0, 5, input = scanner.nextLine())) {
+                    while (!Main.validate(1, 5, input = scanner.nextLine())) {
                         continue;
                     }
 

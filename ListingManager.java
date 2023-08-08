@@ -273,7 +273,7 @@ public class ListingManager {
                     String comment = Main.scanner.nextLine();
 
                     System.out.println("Enter the rating out of 5");
-                    while (!Main.validate(0, 5, input = scanner.nextLine())) {
+                    while (!Main.validate(1, 5, input = scanner.nextLine())) {
                         continue;
                     }
 
@@ -528,8 +528,16 @@ public class ListingManager {
             pstmt.setString(2, Main.login.userID);
             pstmt.executeUpdate();
 
-            query = "DELETE FROM Host WHERE lID = ?";
-            pstmt = connection.prepareStatement(query);
+            removeListing(lID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeListing(int lID) {
+        try {
+            String query = "DELETE FROM Host WHERE lID = ?";
+            PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, lID);
             pstmt.executeUpdate();
 
@@ -546,7 +554,7 @@ public class ListingManager {
 
     public ArrayList<String> getPreviousRenters(String hostID) {
         ArrayList<String> output = new ArrayList<>();
-        String query = "SELECT DISTINCT * FROM " +
+        String query = "SELECT DISTINCT Book.userID, Book.lID FROM " +
                 "Book INNER JOIN Host ON Book.lID = Host.lID " +
                 "WHERE Host.userID = ? AND date < ?";
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
@@ -670,5 +678,22 @@ public class ListingManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<Integer> getCurrentListings(String userID) {
+        ArrayList<Integer> output = new ArrayList<>();
+
+        String query = "SELECT * FROM Host WHERE UserID = ?";
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, userID);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next())
+                output.add(rs.getInt("lID"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return output;
     }
 }

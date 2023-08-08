@@ -9,10 +9,19 @@ public class SearchManager {
         connection = conn;
     }
 
-    public void getNearest(double longitude, double latitude, double distance) {
+    public void getNearest(double longitude, double latitude, double distance, boolean price, boolean descending) {
         String distanceQuery = "SQRT(POW(longitude - ?, 2) + POW(latitude - ?, 2))";
-        String query = "SELECT *," + distanceQuery + " AS Distance FROM Listing NATURAL JOIN Location NATURAL JOIN Host " +
-                "WHERE " + distanceQuery + " < ? ORDER BY Distance;";
+        String query = "SELECT *," + distanceQuery + " AS Distance FROM Listing NATURAL JOIN Location NATURAL JOIN Host NATURAL JOIN Availability " +
+                "WHERE " + distanceQuery + " < ?";
+
+        if (price) {
+            query += " ORDER BY price;";
+            if (descending) {
+                query = query.substring(0, query.length() - 1) + " DESC";
+            }
+        } else {
+            query += ";";
+        }
 
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
             pstmt.setDouble(1, longitude);

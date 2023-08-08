@@ -94,7 +94,7 @@ public class Main {
         System.out.println("Welcome to MyBnB");
         while (running) {
             System.out.println("""
-                    Select on option below
+                    Select an option below
                     1) Login
                     2) Register
                     3) Book
@@ -107,76 +107,13 @@ public class Main {
                 option = scanner.nextLine();
             } while (!validate(1, 6, option));
 
-            String userID, password;
             switch (Integer.parseInt(option)) {
-                case 1:
-                    System.out.println("Enter UserID");
-                    userID = scanner.nextLine();
-                    System.out.println("Enter Password");
-                    password = scanner.nextLine();
-                    login.signIn(userID, password);
-                    break;
-                case 2:
-                    do {
-                        System.out.println("Enter UserID");
-                        userID = scanner.nextLine();
-                    } while (userID.length() == 0 || !login.isTaken(userID));
-
-                    System.out.println("Enter Password");
-                    password = scanner.nextLine();
-
-                    String DOB, occupation, SIN, name, address;
-
-                    System.out.println("Enter Name");
-                    name = scanner.nextLine();
-
-                    System.out.println("Enter Address");
-                    address = scanner.nextLine();
-
-                    System.out.println("Enter Date of Birth in form YYYY-MM-DD");
-                    Date date;
-
-                    while (true) {
-                        DOB = scanner.nextLine();
-                        try {
-                            date = new SimpleDateFormat("yyyy-MM-dd").parse(DOB);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println("Invalid Format");
-                        }
-                    }
-
-                    int age = new Date().getYear() - date.getYear();
-
-                    if (age < 18) {
-                        System.out.println("Must be at least 18 years of age");
-                        continue;
-                    }
-
-                    System.out.println("Enter Occupation");
-                    occupation = scanner.nextLine();
-
-                    do {
-                        System.out.println("Enter SIN");
-                        SIN = scanner.nextLine();
-                    } while (!validate(100000000, 999999999, SIN));
-
-                    login.registerPerson(Integer.parseInt(SIN), name, address, age, new java.sql.Date(date.getTime()), occupation);
-                    login.registerUser(userID, password, Integer.parseInt(SIN));
-
-                    break;
-                case 3:
-                    bookingManager.bookingDisplay();
-                    break;
-                case 4:
-                    listingManager.listingDisplay();
-                    break;
-                case 5:
-                    reportManager.reportDisplay();
-                    break;
-                case 6:
-                    running = false;
-                    break;
+                case 1 -> login.loginDisplay();
+                case 2 -> login.registerDisplay();
+                case 3 -> bookingManager.bookingDisplay();
+                case 4 -> listingManager.listingDisplay();
+                case 5 -> reportManager.reportDisplay();
+                case 6 -> running = false;
             }
         }
     }
