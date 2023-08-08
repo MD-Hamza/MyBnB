@@ -206,14 +206,14 @@ VALUES
 
 INSERT INTO Cancelled_Listings (lID, userID)
 VALUES
-    (543224, 'user1'),
-    (64234, 'user1'),
-    (84324, 'user1'),
+    (23, 'user1'),
+    (23, 'user1'),
+    (23, 'user1'),
 
-    (2422, 'user2'),
-    (2442, 'user2'),
+    (24, 'user2'),
+    (24, 'user2'),
 
-    (414234, 'user3');
+    (41, 'user3');
 
 INSERT INTO feedback_listing (lID, Comment, Rating, UserID)
 VALUES
@@ -235,7 +235,7 @@ VALUES
     (32, 'The full house was comfortable and well-equipped. Great experience.', 4, 'user3'),
     (33, 'Cozy room with a lovely-atmosphere. Friendly host.', 4, 'user3'),
     (34, 'Spacious apartment with modern furnishings. Would stay again.', 5, 'user3'),
-    (35, 'The full house was clean and had all the necessary items. Satisfied.', 4, 'user3');
+    (35, 'The full-house was clean and had all the necessary items. Satisfied.', 4, 'user3');
 
 INSERT INTO feedback_user (UserID, HostID, Comment, Rating)
 VALUES
