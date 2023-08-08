@@ -354,7 +354,7 @@ public class BookingManager {
 
     public ArrayList<Integer> getPreviousBookings(String userID) {
         ArrayList<Integer> output = new ArrayList<>();
-        String query = "SELECT * FROM Listing NATURAL JOIN Location NATURAL JOIN Book WHERE userID = ? AND date < ?";
+        String query = "SELECT * FROM Listing NATURAL JOIN Location NATURAL JOIN Book WHERE userID = ? AND date <= ?";
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
             pstmt.setString(1, userID);
             pstmt.setDate(2, new java.sql.Date(new Date().getTime()));

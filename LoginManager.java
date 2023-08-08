@@ -167,11 +167,41 @@ public class LoginManager {
             for (Integer lID : lIDs)
                 bookingManager.cancel_booking(lID);
 
+            lIDs = bookingManager.getPreviousBookings(userID);
+            for (Integer lID : lIDs)
+                bookingManager.cancel_booking(lID);
+
             for (Integer lID : hosted)
                 listingManager.removeListing(lID);
 
             String personquery = "DELETE FROM Person WHERE SIN = ?";
             String userquery = "DELETE FROM User WHERE userID = ?";
+            String cancelledquery = "DELETE FROM cancelled_bookings WHERE userID = ?";
+            String cancelledlistingquery = "DELETE FROM cancelled_listings WHERE userID = ?";
+            String feedbackcancel = "DELETE FROM feedback_user WHERE userID = ? OR hostID = ?";
+            String feedbacklistingquery = "DELETE FROM feedback_listing WHERE userID = ?";
+            String paymentquery = "DELETE FROM Payment WHERE userID = ?";
+
+            pstmt = connection.prepareStatement(paymentquery);
+            pstmt.setString(1, userID);
+            pstmt.executeUpdate();
+
+            pstmt = connection.prepareStatement(feedbackcancel);
+            pstmt.setString(1, userID);
+            pstmt.setString(2, userID);
+            pstmt.executeUpdate();
+
+            pstmt = connection.prepareStatement(feedbacklistingquery);
+            pstmt.setString(1, userID);
+            pstmt.executeUpdate();
+
+            pstmt = connection.prepareStatement(cancelledquery);
+            pstmt.setString(1, userID);
+            pstmt.executeUpdate();
+
+            pstmt = connection.prepareStatement(cancelledlistingquery);
+            pstmt.setString(1, userID);
+            pstmt.executeUpdate();
 
             pstmt = connection.prepareStatement(userquery);
             pstmt.setString(1, userID);
