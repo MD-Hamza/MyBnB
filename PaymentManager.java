@@ -41,12 +41,18 @@ public class PaymentManager {
 
     public void receiveCardInformation() {
         String query = "SELECT * FROM Payment WHERE userID = ?";
-        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, Main.login.userID);
             if (pstmt.executeQuery().next()) {
                 System.out.println("You already have a card entering a new one will overwrite the previous, press y to continue");
                 if (!Objects.equals(scanner.nextLine(), "y"))
                     return;
+
+                query = "DELETE FROM Payment WHERE userID = ?";
+                pstmt = connection.prepareStatement(query);
+                pstmt.setString(1, Main.login.userID);
+                pstmt.executeUpdate();
             }
         } catch (Exception e) {
             e.printStackTrace();

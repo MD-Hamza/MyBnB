@@ -41,6 +41,7 @@ public class SearchManager {
                     System.out.println("Country: " + country);
 
                     Main.listingManager.printAvailability(lID);
+                    Main.listingManager.printAmenities(lID);
                 }
             }
         } catch (Exception e) {
@@ -66,23 +67,22 @@ public class SearchManager {
                 String country = rs.getString("country");
                 System.out.println(lID + ", " + type+ ", " + l1 +
                         ", " + l2 + ", " + postal + ", " + city + ", " + country);
+                Main.listingManager.printAvailability(lID);
+                Main.listingManager.printAmenities(lID);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void getExact(double longitude, double latitude, String pc, String city, String country) {
+    public void getExact(double longitude, double latitude) {
         String query = "SELECT * " +
                 "FROM Listing NATURAL JOIN Location NATURAL JOIN Host " +
-                "WHERE longitude = ? AND latitude = ? AND postal_code = ? AND city = ? AND country = ? ;";
+                "WHERE longitude = ? AND latitude = ?;";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setDouble(1, longitude);
             preparedStatement.setDouble(2, latitude);
-            preparedStatement.setString(3, pc);
-            preparedStatement.setString(4, city);
-            preparedStatement.setString(5, country);
 
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -96,6 +96,7 @@ public class SearchManager {
                 String country1 = rs.getString("country");
                 System.out.println(lID + ", " + type + ", " + l1 + ", " + l2 + ", " + postal + ", " + city1 + ", " + country1);
                 Main.listingManager.printAvailability(lID);
+                Main.listingManager.printAmenities(lID);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -122,6 +123,8 @@ public class SearchManager {
                 String country1 = rs.getString("country");
                 System.out.println(lID + ", " + type + ", " + l1 + ", " + l2 + ", " + postal + ", " +
                         city1 + ", " + country1);
+                Main.listingManager.printAvailability(lID);
+                Main.listingManager.printAmenities(lID);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -185,6 +188,8 @@ public class SearchManager {
                 String city = rs.getString("city");
                 String country = rs.getString("country");
                 System.out.println(lID + ", " + type + ", " + longitude + ", " + latitude + ", " + postalCode + ", " + city + ", " + country);
+                Main.listingManager.printAvailability(lID);
+                Main.listingManager.printAmenities(lID);
             }
         } catch (SQLException e) {
             e.printStackTrace();

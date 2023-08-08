@@ -58,22 +58,7 @@ public class BookingManager {
                         latitude = scanner.nextLine();
                     } while (!Main.validateDouble(-90, 90, latitude));
 
-                    System.out.println("Enter postal code");
-                    do {
-                        postalCode = scanner.nextLine();
-                    } while (postalCode.length() == 0);
-
-                    System.out.println("Enter country");
-                    do {
-                        country = scanner.nextLine();
-                    } while (country.length() == 0);
-
-                    System.out.println("Enter city");
-                    do {
-                        city = scanner.nextLine();
-                    } while (city.length() == 0);
-
-                    searchManager.getExact(Double.parseDouble(longitude), Double.parseDouble(latitude), postalCode, city, country);
+                    searchManager.getExact(Double.parseDouble(longitude), Double.parseDouble(latitude));
                     break;
                 case 2:
                     String distance;

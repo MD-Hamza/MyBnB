@@ -261,7 +261,7 @@ public class ListingManager {
                     ArrayList<String> renters = getPreviousRenters(Main.login.userID);
 
                     System.out.println("Enter the UserID you wish to comment on");
-                    String userID = scanner.nextLine();
+                    String userID = Main.scanner.nextLine();
 
                     if (!renters.contains(userID)) {
                         System.out.println("UserID not found");
@@ -269,7 +269,8 @@ public class ListingManager {
                     }
 
                     System.out.println("Enter the comment");
-                    String comment = scanner.nextLine();
+
+                    String comment = Main.scanner.nextLine();
 
                     System.out.println("Enter the rating out of 5");
                     while (!Main.validate(0, 5, input = scanner.nextLine())) {
@@ -409,8 +410,9 @@ public class ListingManager {
     }
 
     ListingManager removeAvailability(int lID, Date date) {
-        String checkBooked = "SELECT * FROM Book WHERE lid = " + lID + " AND date = " + date + ";";
-        String query = "DELETE FROM Availability WHERE lid = " + lID + " AND date = " + date + ";";
+        Date converted = new java.sql.Date(date.getTime());
+        String checkBooked = "SELECT * FROM Book WHERE lid = " + lID + " AND date = '" + converted + "';";
+        String query = "DELETE FROM Availability WHERE lid = " + lID + " AND date = '" + converted + "';";
         try (Statement stmt = connection.createStatement()) {
             if (stmt.executeQuery(checkBooked).next()) {
                 System.out.println("Booking is booked, hence cant be removed");
@@ -452,6 +454,28 @@ public class ListingManager {
         return dates;
     }
 
+    public void printAmenities(int lID) {
+        try {
+            String query = "SELECT name FROM Amenities WHERE lID = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, lID);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            System.out.print("Amenities included: ");
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                System.out.print(" " + name);
+            }
+
+            System.out.println("\n");
+            resultSet.close();
+            preparedStatement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public ArrayList<Integer> displayUserListings(String userID) {
         String query = "SELECT * FROM Host NATURAL JOIN Listing NATURAL JOIN Location WHERE UserID = ?";
         ArrayList<Integer> lIDs = new ArrayList<>();
@@ -522,7 +546,7 @@ public class ListingManager {
 
     public ArrayList<String> getPreviousRenters(String hostID) {
         ArrayList<String> output = new ArrayList<>();
-        String query = "SELECT * FROM " +
+        String query = "SELECT DISTINCT * FROM " +
                 "Book INNER JOIN Host ON Book.lID = Host.lID " +
                 "WHERE Host.userID = ? AND date < ?";
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
